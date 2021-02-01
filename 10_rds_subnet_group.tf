@@ -1,3 +1,4 @@
+/*
 #이름 확인, 서브넷 확인
 resource "aws_db_subnet_group" "RDS_01" {
   name        = "dbsubnet_private_prod_db" # 소문자만 가능
@@ -53,3 +54,4 @@ resource "aws_db_parameter_group" "utf8" {
     value = "utf8_general_ci"
   }
 }
+*/
