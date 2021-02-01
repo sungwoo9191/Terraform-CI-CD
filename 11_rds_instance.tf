@@ -7,6 +7,7 @@ IAM - 역할 - rds-monitoring-role 에서 Permissions policies 정책 연결 클
 역할을 콘솔로 부여하면, 테라폼으로 삭제 전에 콘솔 IAM으로 들어가서 만들어진 역할(rds-monitoring-role)을 직접 삭제해야됨.
 */
 
+/* 생성에 오래 걸리니, 일단 주석처리
 # 인스턴스 이름 rds-*-*-db 형식
 # 변경 확인, 스토리지 타입 gp2 사용시 iops 주석 처리 및 파라미터 그룹 주석 확인
 resource "aws_db_instance" "DB" {
@@ -90,3 +91,4 @@ data "aws_iam_policy_document" "rds-monitoring-role" {
     }
   }
 }
+*/

@@ -8,10 +8,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: terraform init & plan
+          name: terraform fmt & init & plan
           command: |
+            terraform fmt
             terraform init -input=false
-            terraform plan -out tfapply -var-file variables.tfvars
+            terraform plan -out tfapply
       - persist_to_workspace:
           root: .
           paths:
@@ -41,7 +42,7 @@ jobs:
       - run:
           name: terraform create destroy plan
           command: |
-            terraform plan -destroy -out tfdestroy -var-file variables.tfvars
+            terraform plan -destroy -out tfdestroy
       - persist_to_workspace:
           root: .
           paths:
