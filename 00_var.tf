@@ -20,6 +20,9 @@ variable "private_port" {
   description = "WEB-WAS 연결 포트 등, NLB 포트"
 }
 
+
+# 00_AWS.tf 백엔드 region 수정해야됨
+# s3_backend 폴더의 backend.tf region도 수정해야됨
 variable "region" {
   default     = "ap-southeast-2"
   description = "서버 생성 지역 입력"
@@ -47,9 +50,14 @@ variable "db_name" {
   default     = "STLDB"
   description = "DB 스토리지 이름"
 }
+variable "db_subnet_group_name" {
+  # 변경 후, 10_tf 파일에서 서브넷 그룹 설명 및 태그 확인
+  default     = "dbsubnet_private_prod_db"
+  description = "DB 서브넷 그룹 이름 (소문자만 가능)"
+}
 variable "db_identifier" {
   default     = "rds-starlabs-prod-db"
-  description = "DB 인스턴스 식별자 (소문자만 가능)"
+  description = "DB 인스턴스 식별자 [RDS 이름] (소문자만 가능)"
 }
 variable "db_port" {
   default     = "3306"

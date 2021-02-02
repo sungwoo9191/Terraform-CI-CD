@@ -20,7 +20,7 @@
 resource "aws_security_group" "Bastion" {
   name        = "SG_${var.customer}_${var.set_code}_Bastion"
   description = "SG_${var.customer}_${var.set_code}_Bastion"
-  vpc_id      = local.vpc_id_value
+  vpc_id      = aws_vpc.VPC_01.id
 
   ingress {
     description = "${var.customer} to Bastion SSH"
@@ -63,7 +63,7 @@ resource "aws_security_group" "Bastion" {
 resource "aws_security_group" "ALB" {
   name        = "SG_${var.customer}_${var.set_code}_ALB"
   description = "SG_${var.customer}_${var.set_code}_ALB"
-  vpc_id      = local.vpc_id_value
+  vpc_id      = aws_vpc.VPC_01.id
 
   ingress {
     description = "Customer to HTTP Service"
@@ -99,7 +99,7 @@ resource "aws_security_group" "ALB" {
 resource "aws_security_group" "WEB" {
   name        = "SG_${var.customer}_${var.set_code}_WEB"
   description = "SG_${var.customer}_${var.set_code}_WEB"
-  vpc_id      = local.vpc_id_value
+  vpc_id      = aws_vpc.VPC_01.id
 
   ingress {
     description     = "Bastion to SSH"
@@ -141,7 +141,7 @@ resource "aws_security_group" "WEB" {
 resource "aws_security_group" "WAS" {
   name        = "SG_${var.customer}_${var.set_code}_WAS"
   description = "SG_${var.customer}_${var.set_code}_WAS"
-  vpc_id      = local.vpc_id_value
+  vpc_id      = aws_vpc.VPC_01.id
 
   ingress {
     description     = "Bastion to SSH"
@@ -183,7 +183,7 @@ resource "aws_security_group" "WAS" {
 resource "aws_security_group" "DB" {
   name        = "SG_${var.customer}_${var.set_code}_DB"
   description = "SG_${var.customer}_${var.set_code}_DB"
-  vpc_id      = local.vpc_id_value
+  vpc_id      = aws_vpc.VPC_01.id
 
   ingress {
     description     = "WAS to DB"

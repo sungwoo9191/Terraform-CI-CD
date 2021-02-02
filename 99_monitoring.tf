@@ -4,20 +4,20 @@
 
 # 모니터링 EIP
 # 명세서에 맞게 수정 필요
-resource "aws_eip" "EIP_EC2_Starlabs_Prod_Monitoring_01_JPAWSAP0007" {
+resource "aws_eip" "Monitoring_01" {
   instance             = aws_instance.Monitoring_01.id
   vpc                  = true
   network_border_group = var.region
   public_ipv4_pool     = "amazon"
 
   tags = {
-    Name = "EIP_EC2_Starlabs_Prod_Monitoring_01_JPAWSAP0007"
+    Name = "EIP_EC2_${var.customer}_${var.set_code}_Monitoring_01_${var.country}AWS${var.os_amzn2}P0007"
   }
 }
 resource "aws_security_group" "Monitoring" {
   name        = "SG_${var.customer}_${var.set_code}_Monitoring"
   description = "SG_${var.customer}_${var.set_code}_Monitoring"
-  vpc_id      = local.vpc_id_value
+  vpc_id      = aws_vpc.VPC_01.id
 
   ingress {
     description = "${var.customer} to EC2 SSH"
@@ -55,12 +55,12 @@ resource "aws_security_group" "Monitoring" {
 }
 
 resource "aws_instance" "Monitoring_01" {
-  ami                                  = var.amzn2               # 생성 OS
-  instance_type                        = "t2.micro"              # 인스턴스 타입
-  availability_zone                    = "${var.region}a"        # 생성 지역
-  subnet_id                            = local.subnet_bastion.id # bastion subnet
-  instance_initiated_shutdown_behavior = "stop"                  # 종료방식
-  disable_api_termination              = "false"                 # 우발적 종료 보호
+  ami                                  = var.amzn2                           # 생성 OS
+  instance_type                        = "t2.micro"                          # 인스턴스 타입
+  availability_zone                    = "${var.region}a"                    # 생성 지역
+  subnet_id                            = aws_subnet.Public_Bastion_AZ1_01.id # bastion subnet
+  instance_initiated_shutdown_behavior = "stop"                              # 종료방식
+  disable_api_termination              = "true"                              # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.2.12"

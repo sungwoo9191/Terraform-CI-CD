@@ -10,10 +10,10 @@ resource "aws_lb" "ALB" {
 
   # enable_deletion_protection = true
   subnet_mapping {
-    subnet_id = local.subnet_alb_az1.id
+    subnet_id = aws_subnet.Public_ALB_AZ1_01.id
   }
   subnet_mapping {
-    subnet_id = local.subnet_alb_az2.id
+    subnet_id = aws_subnet.Public_ALB_AZ2_01.id
   }
 
   tags = {
@@ -79,10 +79,10 @@ resource "aws_lb" "NLB" {
 
   # enable_deletion_protection = true
   subnet_mapping {
-    subnet_id = local.subnet_nlb_az1.id
+    subnet_id = aws_subnet.Private_NLB_AZ1_01.id
   }
   subnet_mapping {
-    subnet_id = local.subnet_nlb_az2.id
+    subnet_id = aws_subnet.Private_NLB_AZ2_01.id
   }
 
   tags = {

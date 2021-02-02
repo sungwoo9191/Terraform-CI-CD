@@ -6,7 +6,7 @@ resource "aws_lb_target_group" "WEB" {
   target_type = "instance"
   port        = 80
   protocol    = "HTTP"
-  vpc_id      = local.vpc_id_value
+  vpc_id      = aws_vpc.VPC_01.id
   # proxy_protocol_v2 = "enable" # HTTP2인 디폴트값은 비활성화
 
   health_check {
@@ -40,7 +40,7 @@ resource "aws_lb_target_group" "WAS" {
   target_type = "instance"
   port        = var.private_port
   protocol    = "TCP"
-  vpc_id      = local.vpc_id_value
+  vpc_id      = aws_vpc.VPC_01.id
   # proxy_protocol_v2 = "enable" # HTTP2인 디폴트값은 비활성화
 
   /* TCP 기본 설정은 없음.

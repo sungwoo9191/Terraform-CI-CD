@@ -2,12 +2,12 @@
 #명세서와 맞는지 확인 필수(ami, region, type, subnet, ip, 용량)
 #EC2_Starlabs_Prod_Bastion_01_KRAWSAP0001
 resource "aws_instance" "Bastion_01" {
-  ami                                  = var.amzn2               # 생성 OS
-  instance_type                        = "t2.micro"              # 인스턴스 타입
-  availability_zone                    = "${var.region}a"        # 생성 지역
-  subnet_id                            = local.subnet_bastion.id # bastion subnet
-  instance_initiated_shutdown_behavior = "stop"                  # 종료방식
-  disable_api_termination              = "false"                 # 우발적 종료 보호
+  ami                                  = var.amzn2                           # 생성 OS
+  instance_type                        = "t2.micro"                          # 인스턴스 타입
+  availability_zone                    = "${var.region}a"                    # 생성 지역
+  subnet_id                            = aws_subnet.Public_Bastion_AZ1_01.id # bastion subnet
+  instance_initiated_shutdown_behavior = "stop"                              # 종료방식
+  disable_api_termination              = "true"                              # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.2.10"
@@ -37,12 +37,12 @@ resource "aws_instance" "Bastion_01" {
 #명세서와 맞는지 확인 필수(ami, region, type, subnet, ip, 용량)
 #EC2_Starlabs_Prod_Bastion_02_KRAWSWP0002
 resource "aws_instance" "Bastion_02" {
-  ami                                  = var.win2016             # 생성 OS
-  instance_type                        = "t2.micro"              # 인스턴스 타입
-  availability_zone                    = "${var.region}a"        # 생성 지역
-  subnet_id                            = local.subnet_bastion.id # bastion subnet
-  instance_initiated_shutdown_behavior = "stop"                  # 종료방식
-  disable_api_termination              = "false"                 # 우발적 종료 보호
+  ami                                  = var.win2016                         # 생성 OS
+  instance_type                        = "t2.micro"                          # 인스턴스 타입
+  availability_zone                    = "${var.region}a"                    # 생성 지역
+  subnet_id                            = aws_subnet.Public_Bastion_AZ1_01.id # bastion subnet
+  instance_initiated_shutdown_behavior = "stop"                              # 종료방식
+  disable_api_termination              = "true"                              # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.2.11"
@@ -70,12 +70,12 @@ resource "aws_instance" "Bastion_02" {
 #명세서와 맞는지 확인 필수(ami, region, type, subnet, ip, 용량)
 #EC2_Starlabs_Prod_WEB_01_KRAWSAP0003
 resource "aws_instance" "WEB_01" {
-  ami                                  = var.amzn2               # 생성 OS
-  instance_type                        = "t2.micro"              # 인스턴스 타입
-  availability_zone                    = "${var.region}a"        # 생성 지역
-  subnet_id                            = local.subnet_web_az1.id # bastion subnet
-  instance_initiated_shutdown_behavior = "stop"                  # 종료방식
-  disable_api_termination              = "false"                 # 우발적 종료 보호
+  ami                                  = var.amzn2                        # 생성 OS
+  instance_type                        = "t2.micro"                       # 인스턴스 타입
+  availability_zone                    = "${var.region}a"                 # 생성 지역
+  subnet_id                            = aws_subnet.Private_WEB_AZ1_01.id # bastion subnet
+  instance_initiated_shutdown_behavior = "stop"                           # 종료방식
+  disable_api_termination              = "true"                           # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.13.10"
@@ -103,12 +103,12 @@ resource "aws_instance" "WEB_01" {
 #명세서와 맞는지 확인 필수(ami, region, type, subnet, ip, 용량)
 #EC2_Starlabs_Prod_WEB_02_KRAWSAP0004
 resource "aws_instance" "WEB_02" {
-  ami                                  = var.amzn2               # 생성 OS
-  instance_type                        = "t2.micro"              # 인스턴스 타입
-  availability_zone                    = "${var.region}c"        # 생성 지역
-  subnet_id                            = local.subnet_web_az2.id # bastion subnet
-  instance_initiated_shutdown_behavior = "stop"                  # 종료방식
-  disable_api_termination              = "false"                 # 우발적 종료 보호
+  ami                                  = var.amzn2                        # 생성 OS
+  instance_type                        = "t2.micro"                       # 인스턴스 타입
+  availability_zone                    = "${var.region}c"                 # 생성 지역
+  subnet_id                            = aws_subnet.Private_WEB_AZ2_01.id # bastion subnet
+  instance_initiated_shutdown_behavior = "stop"                           # 종료방식
+  disable_api_termination              = "true"                           # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.13.210"
@@ -136,12 +136,12 @@ resource "aws_instance" "WEB_02" {
 #명세서와 맞는지 확인 필수(ami, region, type, subnet, ip, 용량)
 #EC2_Starlabs_Prod_WAS_01_KRAWSAP0005
 resource "aws_instance" "WAS_01" {
-  ami                                  = var.amzn2               # 생성 OS
-  instance_type                        = "t2.micro"              # 인스턴스 타입
-  availability_zone                    = "${var.region}a"        # 생성 지역
-  subnet_id                            = local.subnet_was_az1.id # bastion subnet
-  instance_initiated_shutdown_behavior = "stop"                  # 종료방식
-  disable_api_termination              = "false"                 # 우발적 종료 보호
+  ami                                  = var.amzn2                        # 생성 OS
+  instance_type                        = "t2.micro"                       # 인스턴스 타입
+  availability_zone                    = "${var.region}a"                 # 생성 지역
+  subnet_id                            = aws_subnet.Private_WAS_AZ1_01.id # bastion subnet
+  instance_initiated_shutdown_behavior = "stop"                           # 종료방식
+  disable_api_termination              = "true"                           # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.14.10"
@@ -169,12 +169,12 @@ resource "aws_instance" "WAS_01" {
 #명세서와 맞는지 확인 필수(ami, region, type, subnet, ip, 용량)
 #EC2_Starlabs_Prod_WAS_02_KRAWSAP0006
 resource "aws_instance" "WAS_02" {
-  ami                                  = var.amzn2               # 생성 OS
-  instance_type                        = "t2.micro"              # 인스턴스 타입
-  availability_zone                    = "${var.region}c"        # 생성 지역
-  subnet_id                            = local.subnet_was_az2.id # bastion subnet
-  instance_initiated_shutdown_behavior = "stop"                  # 종료방식
-  disable_api_termination              = "false"                 # 우발적 종료 보호
+  ami                                  = var.amzn2                        # 생성 OS
+  instance_type                        = "t2.micro"                       # 인스턴스 타입
+  availability_zone                    = "${var.region}c"                 # 생성 지역
+  subnet_id                            = aws_subnet.Private_WAS_AZ2_01.id # bastion subnet
+  instance_initiated_shutdown_behavior = "stop"                           # 종료방식
+  disable_api_termination              = "true"                           # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.14.210"

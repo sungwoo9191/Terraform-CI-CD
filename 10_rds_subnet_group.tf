@@ -1,9 +1,9 @@
 /*
-#이름 확인, 서브넷 확인
+#DB 서브넷 그룹
 resource "aws_db_subnet_group" "RDS_01" {
-  name        = "dbsubnet_private_prod_db" # 소문자만 가능
+  name        = var.db_subnet_group_name
   description = "DBSubnet_Private_${var.set_code}_DB"
-  subnet_ids  = [local.subnet_db_az1.id, local.subnet_db_az2.id]
+  subnet_ids  = [aws_subnet.Private_DB_AZ1_01.id, aws_subnet.Private_DB_AZ2_01.id]
 
   tags = {
     Name = "DBSubnet_Private_${var.set_code}_DB"
