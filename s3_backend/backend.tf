@@ -45,7 +45,6 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
 resource "aws_s3_bucket" "terraform-state" {
   bucket = var.s3_state
   acl    = "private"
-  encrypt = "true"
   versioning {
     enabled = true
   }
