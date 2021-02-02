@@ -76,9 +76,13 @@ workflows:
   plan_approve_apply:
     jobs:
       - init
-      - plan:
+      - hold-plan:
+          type: approval
           requires:
             - init
+      - plan:
+          requires:
+            - hold-plan
       - hold-apply:
           type: approval
           requires:
