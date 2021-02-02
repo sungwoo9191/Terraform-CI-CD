@@ -7,10 +7,12 @@ variable "s3_state" {
   default     = "circleci-terraform-state-1"
   description = "s3 state 이름 입력"
 }
+/*
 variable "s3_state_logs" {
   default     = "circleci-terraform-logs"
   description = "s3 logs 버킷 이름 입력"
 }
+*/
 
 terraform {
   required_providers {
@@ -38,14 +40,6 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
     type = "S"
   }
 }
-# 로그 저장용 버킷
-resource "aws_s3_bucket" "logs" {
-  bucket = var.s3_state_logs
-  acl    = "log-delivery-write"
-  tags = {
-    Name = var.s3_state_logs
-  }
-}
 
 # Terraform state 저장용 S3 버킷
 resource "aws_s3_bucket" "terraform-state" {
@@ -54,14 +48,29 @@ resource "aws_s3_bucket" "terraform-state" {
   versioning {
     enabled = true
   }
+
   tags = {
     Name = var.s3_state
   }
+  
+  lifecycle {
+    prevent_destroy = true
+  }
+  /*
   logging {
     target_bucket = aws_s3_bucket.logs.id
     target_prefix = "log/"
   }
-  lifecycle {
-    prevent_destroy = true
+  */
+}
+
+/*
+# 로그 저장용 버킷
+resource "aws_s3_bucket" "logs" {
+  bucket = var.s3_state_logs
+  acl    = "log-delivery-write"
+  tags = {
+    Name = var.s3_state_logs
   }
 }
+*/

@@ -7,7 +7,7 @@ resource "aws_instance" "Bastion_01" {
   availability_zone                    = "${var.region}a"                    # 생성 지역
   subnet_id                            = aws_subnet.Public_Bastion_AZ1_01.id # bastion subnet
   instance_initiated_shutdown_behavior = "stop"                              # 종료방식
-  disable_api_termination              = "true"                              # 우발적 종료 보호
+  disable_api_termination              = "false"                             # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.2.10"
@@ -42,7 +42,7 @@ resource "aws_instance" "Bastion_02" {
   availability_zone                    = "${var.region}a"                    # 생성 지역
   subnet_id                            = aws_subnet.Public_Bastion_AZ1_01.id # bastion subnet
   instance_initiated_shutdown_behavior = "stop"                              # 종료방식
-  disable_api_termination              = "true"                              # 우발적 종료 보호
+  disable_api_termination              = "false"                             # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.2.11"
@@ -75,7 +75,7 @@ resource "aws_instance" "WEB_01" {
   availability_zone                    = "${var.region}a"                 # 생성 지역
   subnet_id                            = aws_subnet.Private_WEB_AZ1_01.id # bastion subnet
   instance_initiated_shutdown_behavior = "stop"                           # 종료방식
-  disable_api_termination              = "true"                           # 우발적 종료 보호
+  disable_api_termination              = "false"                          # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.13.10"
@@ -108,7 +108,7 @@ resource "aws_instance" "WEB_02" {
   availability_zone                    = "${var.region}c"                 # 생성 지역
   subnet_id                            = aws_subnet.Private_WEB_AZ2_01.id # bastion subnet
   instance_initiated_shutdown_behavior = "stop"                           # 종료방식
-  disable_api_termination              = "true"                           # 우발적 종료 보호
+  disable_api_termination              = "false"                          # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.13.210"
@@ -141,7 +141,7 @@ resource "aws_instance" "WAS_01" {
   availability_zone                    = "${var.region}a"                 # 생성 지역
   subnet_id                            = aws_subnet.Private_WAS_AZ1_01.id # bastion subnet
   instance_initiated_shutdown_behavior = "stop"                           # 종료방식
-  disable_api_termination              = "true"                           # 우발적 종료 보호
+  disable_api_termination              = "false"                          # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.14.10"
@@ -174,7 +174,7 @@ resource "aws_instance" "WAS_02" {
   availability_zone                    = "${var.region}c"                 # 생성 지역
   subnet_id                            = aws_subnet.Private_WAS_AZ2_01.id # bastion subnet
   instance_initiated_shutdown_behavior = "stop"                           # 종료방식
-  disable_api_termination              = "true"                           # 우발적 종료 보호
+  disable_api_termination              = "false"                          # 우발적 종료 보호
 
   #EIP와 연결된 인스턴스는 public_ip를 적지 않음.
   private_ip             = "10.0.14.210"
