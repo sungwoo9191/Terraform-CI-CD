@@ -115,6 +115,7 @@ resource "aws_security_group" "WEB" {
     protocol        = "TCP"
     security_groups = [aws_security_group.ALB.id]
   }
+  /*
   ingress {
     description     = "ALB to HTTPs Service"
     from_port       = 443
@@ -122,6 +123,7 @@ resource "aws_security_group" "WEB" {
     protocol        = "TCP"
     security_groups = [aws_security_group.ALB.id]
   }
+  */
   egress {
     description = "External Connection"
     from_port   = 0
@@ -150,6 +152,7 @@ resource "aws_security_group" "WAS" {
     protocol        = "TCP"
     security_groups = [aws_security_group.Bastion.id]
   }
+  /*
   ingress {
     description     = "WEB to WAS"
     from_port       = var.private_port
@@ -157,6 +160,7 @@ resource "aws_security_group" "WAS" {
     protocol        = "TCP"
     security_groups = [aws_security_group.WEB.id]
   }
+  */
   ingress {
     description = "NLB to WAS"
     from_port   = var.private_port
