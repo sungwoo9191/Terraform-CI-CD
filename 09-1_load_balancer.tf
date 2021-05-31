@@ -1,6 +1,10 @@
 # HTTPS 적용 안함 (주석처리)
 # ALB-Starlabs-Prod-WEB-Ext
 # ALB-*-*-WEB-Ext 형식, 이름 변경 시 태그와 같이 변경
+
+# 80 -> 443 리다이렉트 사용 안하면, 09-2_LB_HTTPS.tf 주석처리
+# 마찬가지로 아래 ALB_forward default_action 주석 변경
+
 resource "aws_lb" "ALB" {
   name               = "ALB-${var.customer}-${var.set_code}-WEB-Ext"
   internal           = false
@@ -20,22 +24,16 @@ resource "aws_lb" "ALB" {
     Name = "ALB-${var.customer}-${var.set_code}-WEB-Ext"
   }
 }
-resource "aws_lb_listener" "ALB_forward" {
+resource "aws_lb_listener" "ALB_http" {
   load_balancer_arn = aws_lb.ALB.arn
-  port              = "80"   # HTTPS 리다이렉션 적용시, 443 아래 주석 제거
-  protocol          = "HTTP" # HTTPS 적용시, HTTPS
-
+  port              = "80" # HTTPS 리다이렉션 사용안하면, default_action 주석 변경
+  protocol          = "HTTP"
+  /*
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.WEB.arn
   }
-}
-/*
-resource "aws_lb_listener" "ALB_redirect" {
-  load_balancer_arn = aws_lb.ALB.arn
-  port              = "80"
-  protocol          = "HTTP"
-
+  */
   default_action {
     type = "redirect"
 
@@ -50,22 +48,6 @@ resource "aws_lb_listener" "ALB_redirect" {
     }
   }
 }
-resource "aws_lb_listener_rule" "host_based_weighted_routing" {
-  listener_arn = aws_lb_listener.front_end.arn
-  priority     = 99
-
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.static.arn
-  }
-
-  condition {
-    host_header {
-      values = ["my-service.*.terraform.io"]
-    }
-  }
-}
-*/
 
 
 

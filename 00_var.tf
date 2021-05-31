@@ -24,7 +24,7 @@ variable "private_port" {
 # 00_AWS.tf 백엔드 region 수정해야됨
 # s3_backend 폴더의 backend.tf region도 수정해야됨
 variable "region" {
-  default     = "ap-southeast-2"
+  default     = "ap-northeast-1"
   description = "서버 생성 지역 입력"
 }
 variable "country" {
