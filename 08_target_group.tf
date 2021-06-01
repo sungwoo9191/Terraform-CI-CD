@@ -10,10 +10,16 @@ resource "aws_lb_target_group" "WEB" {
   # proxy_protocol_v2 = "enable" # HTTP2인 디폴트값은 비활성화
 
   health_check {
-    enabled  = "true"
-    path     = "/health.html"
-    protocol = "HTTP"
+    enabled             = true
+    protocol            = "HTTP"
+    path                = "/index.html"
+    healthy_threshold   = 2   # 정상임계값, 2-10
+    unhealthy_threshold = 2   # 비정상임계값, 2-10
+    timeout             = 5   # 제한 시간, default 5
+    interval            = 30  # 간격, 5 or 300
+    matcher             = 200 # 리다이렉트 사용시 301
   }
+
   tags = {
     Name = "TG-${var.customer}-${var.set_code}-WEB-Ext"
   }
@@ -50,6 +56,16 @@ resource "aws_lb_target_group" "WAS" {
     protocol = "HTTP"
   }
   */
+
+  health_check {
+    enabled             = true
+    interval            = 10 # 간격, 10 or 30
+    healthy_threshold   = 2  # 정상임계값, 2-10
+    unhealthy_threshold = 2  # 비정상임계값, 2-10
+    protocol            = "TCP"
+    port                = "traffic-port"
+  }
+
   tags = {
     Name = "TG-${var.customer}-${var.set_code}-WAS-Int"
   }
