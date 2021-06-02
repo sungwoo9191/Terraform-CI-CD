@@ -59,6 +59,8 @@ resource "aws_lb" "NLB" {
   load_balancer_type = "network"
   ip_address_type    = "ipv4"
 
+  enable_cross_zone_load_balancing = true # 교차 영역 로드 밸런싱
+
   # enable_deletion_protection = true
   subnet_mapping {
     subnet_id = aws_subnet.Private_NLB_AZ1_01.id

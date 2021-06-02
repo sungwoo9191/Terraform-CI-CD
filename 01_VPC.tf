@@ -7,7 +7,7 @@ resource "aws_vpc" "VPC_01" {
   instance_tenancy                 = "default"     # 테넌시
   enable_dns_hostnames             = "true"
   enable_dns_support               = "true"
-  
+
   tags = {
     Name = "VPC_${var.customer}_${var.set_code}" # 태그
   }
