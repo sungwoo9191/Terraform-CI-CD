@@ -1,6 +1,6 @@
 #사전에 AWS 콘솔에서 key_pair 생성해서 이름을 넣어야 됨
 variable "key_name" {
-  default     = "KeyPair_Starlabs_Prod"
+  default     = "keypair_sw_prd"
   description = "키페어 이름"
 }
 

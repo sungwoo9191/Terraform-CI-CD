@@ -4,13 +4,13 @@ variable "region" {
 }
 # 대문자, 언더라인 안됨
 variable "s3_state" {
-  default     = "circleci-terraform-state-1"
-  description = "s3 state 이름 입력"
+  default     = "sw-tc-t"
+  description = "sw-tc-t"
 }
 
 variable "s3_state_logs" {
-  default     = "circleci-terraform-logs-1"
-  description = "s3 logs 버킷 이름 입력"
+  default     = "sw-tc-t-log"
+  description = "ssw-tc-t-log"
 }
 
 
